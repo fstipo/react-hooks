@@ -7,20 +7,19 @@ import React, { useState } from 'react';
 // };
 
 const UseStateComp = () => {
-  const [countState, setState] = useState({ count: 4, theme: 'red' });
-  const count = countState.count;
-  const theme = countState.theme;
+  const [count, setCount] = useState(10);
+  const [theme, setTheme] = useState(' Red');
 
   //with objects
-  const decreaseCountHandler = () =>
-    setState((prevState) => {
-      return { ...prevState, count: prevState.count - 1 };
-    });
+  const decreaseCountHandler = () => {
+    setCount((prevCount) => prevCount - 1);
+    setTheme(' Red');
+  };
 
-  const increaseCountHandler = () =>
-    setState((prevState) => {
-      return { ...prevState, count: prevState.count + 1 };
-    });
+  const increaseCountHandler = () => {
+    setCount((prevCount) => prevCount + 1);
+    setTheme(' Green');
+  };
 
   return (
     <div className="text-center mt-4">
