@@ -16,6 +16,7 @@ const Dashboard = ({ title }) => {
                 className="text-decoration-none text-dark"
                 activeClassName={'active__secondary'}
                 inactiveClassName={'inactive__secondary'}
+                exact={true}
                 to="/"
               >
                 Overview

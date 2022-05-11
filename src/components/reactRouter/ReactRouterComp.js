@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useRoutes, useLocation } from 'react-router-dom';
+import { Link, useRoutes, useLocation, matchRoutes } from 'react-router-dom';
 import Dashboard from './Dashboard';
 
 import Page from './Page';
@@ -7,6 +7,7 @@ import './ReactRouter.css';
 
 export const NavLink = ({
   to,
+  exact,
   className,
   activeClassName,
   inactiveClassName,
@@ -14,7 +15,14 @@ export const NavLink = ({
   ...rest
 }) => {
   const location = useLocation();
-  const isActive = to === location.pathname;
+  const routesMatches = matchRoutes(routes, location);
+  let isActive;
+  if (exact) {
+    isActive = to === location.pathname;
+  } else {
+    isActive = routesMatches.some((match) => match.pathname === to);
+  }
+
   const allClasses =
     className + (isActive ? ` ${activeClassName}` : ` ${inactiveClassName}`);
 
