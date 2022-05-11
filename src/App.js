@@ -1,7 +1,7 @@
 import React from 'react';
+import ReactRouterComp from './components/reactRouter/ReactRouterComp';
 import './App.css';
-// import UseStateComp from './components/UseStateComp';
-import ReactRouterComp from './components/ReactRouterComp';
+
 const App = () => {
   return (
     <>
