@@ -1,12 +1,54 @@
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Link, useRoutes, useLocation } from 'react-router-dom';
 import Dashboard from './Dashboard';
-import NavLink from './NavLink';
-import Page from './Page';
 
+import Page from './Page';
 import './ReactRouter.css';
 
+export const NavLink = ({
+  to,
+  className,
+  activeClassName,
+  inactiveClassName,
+  children,
+  ...rest
+}) => {
+  const location = useLocation();
+  const isActive = to === location.pathname;
+  const allClasses =
+    className + (isActive ? ` ${activeClassName}` : ` ${inactiveClassName}`);
+
+  return (
+    <Link to={to} className={allClasses} {...rest}>
+      {children}
+    </Link>
+  );
+};
+
+export const routes = [
+  {
+    path: '/',
+    element: <Dashboard title="Dashboard" />,
+    children: [
+      { path: '/', element: <p className="display-5 fw-bold">Overview</p> },
+      {
+        path: '/user-details',
+        element: <p className="display-5 fw-bold">User Details</p>,
+      },
+
+      {
+        path: '/sales',
+        element: <p className="display-5 fw-bold">Sales</p>,
+      },
+    ],
+  },
+  { path: '/projects', element: <Page title="Projects" /> },
+  { path: '/team', element: <Page title="Team" /> },
+  { path: '/calendar', element: <Page title="Calendar" /> },
+];
+
 const ReactRouterComp = (props) => {
+  let element = useRoutes(routes);
   return (
     <div className="container-fluid mt-2">
       <header className="d-flex align-items-center justify-content-start gap-3">
@@ -55,7 +97,8 @@ const ReactRouterComp = (props) => {
         </ul>
       </header>
       <hr />
-      <Routes>
+      {element}
+      {/* <Routes>
         <Route path="/" element={<Dashboard title="Dashboard" />}>
           <Route
             path="/"
@@ -73,7 +116,7 @@ const ReactRouterComp = (props) => {
         <Route path="/projects" element={<Page title="Projects" />} />
         <Route path="/team" element={<Page title="Team" />} />
         <Route path="/calendar" element={<Page title="Calendar" />} />
-      </Routes>
+      </Routes> */}
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import { NavLink } from './NavLink';
+import { NavLink } from './ReactRouterComp';
 
 import './../../App.css';
 
