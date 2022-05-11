@@ -1,9 +1,37 @@
 import React from 'react';
-import { Link, useRoutes, useLocation, matchRoutes } from 'react-router-dom';
+import {
+  Link,
+  useRoutes,
+  useLocation,
+  matchRoutes,
+  useResolvedPath,
+} from 'react-router-dom';
 import Dashboard from './Dashboard';
 
 import Page from './Page';
 import './ReactRouter.css';
+
+export const routes = [
+  {
+    path: '/dashboard-bla',
+    element: <Dashboard title="Dashboard" />,
+    children: [
+      { path: '', element: <p className="display-5 fw-bold">Overview</p> },
+      {
+        path: 'user-details',
+        element: <p className="display-5 fw-bold">User Details</p>,
+      },
+
+      {
+        path: 'sales',
+        element: <p className="display-5 fw-bold">Sales</p>,
+      },
+    ],
+  },
+  { path: '/projects', element: <Page title="Projects" /> },
+  { path: '/team', element: <Page title="Team" /> },
+  { path: '/calendar', element: <Page title="Calendar" /> },
+];
 
 export const NavLink = ({
   to,
@@ -16,11 +44,14 @@ export const NavLink = ({
 }) => {
   const location = useLocation();
   const routesMatches = matchRoutes(routes, location);
+  let resolvedLocation = useResolvedPath(to);
   let isActive;
   if (exact) {
-    isActive = to === location.pathname;
+    isActive = resolvedLocation.pathname === location.pathname;
   } else {
-    isActive = routesMatches.some((match) => match.pathname === to);
+    isActive = routesMatches.some(
+      (match) => match.pathname === resolvedLocation.pathname
+    );
   }
 
   const allClasses =
@@ -32,28 +63,6 @@ export const NavLink = ({
     </Link>
   );
 };
-
-export const routes = [
-  {
-    path: '/',
-    element: <Dashboard title="Dashboard" />,
-    children: [
-      { path: '/', element: <p className="display-5 fw-bold">Overview</p> },
-      {
-        path: '/user-details',
-        element: <p className="display-5 fw-bold">User Details</p>,
-      },
-
-      {
-        path: '/sales',
-        element: <p className="display-5 fw-bold">Sales</p>,
-      },
-    ],
-  },
-  { path: '/projects', element: <Page title="Projects" /> },
-  { path: '/team', element: <Page title="Team" /> },
-  { path: '/calendar', element: <Page title="Calendar" /> },
-];
 
 const ReactRouterComp = (props) => {
   let element = useRoutes(routes);
@@ -67,7 +76,7 @@ const ReactRouterComp = (props) => {
               className="link text-decoration-none text-dark"
               activeClassName={'active-link'}
               inactiveClassName={'inactive-link'}
-              to="/"
+              to="/dashboard-bla"
             >
               Dashboard
             </NavLink>

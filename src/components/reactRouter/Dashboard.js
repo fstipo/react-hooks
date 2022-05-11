@@ -17,7 +17,7 @@ const Dashboard = ({ title }) => {
                 activeClassName={'active__secondary'}
                 inactiveClassName={'inactive__secondary'}
                 exact={true}
-                to="/"
+                to=""
               >
                 Overview
               </NavLink>
@@ -27,7 +27,7 @@ const Dashboard = ({ title }) => {
                 className="text-decoration-none text-dark"
                 activeClassName={'active__secondary'}
                 inactiveClassName={'inactive__secondary'}
-                to="/user-details"
+                to="user-details"
               >
                 User Details
               </NavLink>
@@ -37,7 +37,7 @@ const Dashboard = ({ title }) => {
                 className="text-decoration-none text-dark"
                 activeClassName={'active__secondary'}
                 inactiveClassName={'inactive__secondary'}
-                to="/sales"
+                to="sales"
               >
                 Sales
               </NavLink>
