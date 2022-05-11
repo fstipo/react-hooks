@@ -7,19 +7,29 @@ import {
   useResolvedPath,
 } from 'react-router-dom';
 import Dashboard from './Dashboard';
+import NewUsers from './NewUsers';
+import { UserDetail } from './NewUsers';
 
 import Page from './Page';
 import './ReactRouter.css';
 
 export const routes = [
   {
-    path: '/dashboard-bla',
+    path: '/dashboard',
     element: <Dashboard title="Dashboard" />,
     children: [
       { path: '', element: <p className="display-5 fw-bold">Overview</p> },
       {
         path: 'user-details',
-        element: <p className="display-5 fw-bold">User Details</p>,
+        element: (
+          <NewUsers className="display-5 fw-bold">User Details</NewUsers>
+        ),
+        children: [
+          {
+            path: ':id',
+            element: <UserDetail className="display-6"></UserDetail>,
+          },
+        ],
       },
 
       {
@@ -66,6 +76,7 @@ export const NavLink = ({
 
 const ReactRouterComp = (props) => {
   let element = useRoutes(routes);
+
   return (
     <div className="container-fluid mt-2">
       <header className="d-flex align-items-center justify-content-start gap-3">
@@ -76,7 +87,7 @@ const ReactRouterComp = (props) => {
               className="link text-decoration-none text-dark"
               activeClassName={'active-link'}
               inactiveClassName={'inactive-link'}
-              to="/dashboard-bla"
+              to="/dashboard"
             >
               Dashboard
             </NavLink>

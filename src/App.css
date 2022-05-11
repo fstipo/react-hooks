@@ -21,3 +21,14 @@ body {
   padding: 10px;
   border-bottom: 5px solid gray;
 }
+
+.active__third {
+  background-color: yellow;
+  padding: 2px;
+  color: rgb(49, 48, 48);
+  font-weight: bold;
+}
+
+.inactive__third {
+  color: rgb(238, 232, 232);
+}
